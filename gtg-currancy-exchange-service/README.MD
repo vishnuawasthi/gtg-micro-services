@@ -4,6 +4,14 @@
 	http://localhost:8083//exchange-rate/USD/to/INR
 	
 
+2. I am running two instance of exchange service at below 
+	set vm Argument 
+	-Dserver.port=8085
+
+	http://localhost:8085//exchange-rate/USD/to/INR
+	
+	http://localhost:8086//exchange-rate/USD/to/INR
+
 
 
 #### H2 Database config #######

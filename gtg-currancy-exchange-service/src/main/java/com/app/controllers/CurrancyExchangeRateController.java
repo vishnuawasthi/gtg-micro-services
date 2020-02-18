@@ -2,6 +2,9 @@ package com.app.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,9 +25,16 @@ public class CurrancyExchangeRateController {
 	private ExchangeValueRepository exchangeValueRepository;
 
 	@GetMapping(value = "/exchange-rate/{from}/to/{to}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Object getExhcangeRate(@PathVariable String from, @PathVariable String to) {
+	public Object getExhcangeRate(@PathVariable String from, @PathVariable String to, HttpServletRequest request) {
 
 		ExchangeValue entity = exchangeValueRepository.findByFromAndTo(from, to);
+		
+		int port =request.getServerPort();
+		
+		if(Objects.nonNull(entity)) {
+			entity.setPort(port);
+		}
+		
 		return new ResponseEntity<ExchangeValue>(entity, HttpStatus.OK);
 
 	}
