@@ -3,17 +3,15 @@ package com.app;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
-
-
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @SpringBootApplication
-@EnableFeignClients(basePackages="com.app.restclients")
 @EnableDiscoveryClient
-public class GtgCurrencyConversionServiceApplication {
+@EnableZuulProxy
+public class GtgZuulApiGatewayServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GtgCurrencyConversionServiceApplication.class, args);
+		SpringApplication.run(GtgZuulApiGatewayServerApplication.class, args);
 	}
 
 }

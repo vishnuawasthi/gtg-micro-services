@@ -16,7 +16,9 @@
 	<modules>
 		<module>../gtg-api-services</module>
 		<module>../gtg-services-central-config</module>
-		<module>../gtg-currancy-exchange-service</module>
+		<module>../gtg-currency-exchange-service</module>
 		<module>../gtg-currency-conversion-service</module>
+		<module>../gtg-netflix-eureka-naming-server</module>
+		<module>../gtg-zuul-api-gateway-server</module>
 	</modules>
 </project>
