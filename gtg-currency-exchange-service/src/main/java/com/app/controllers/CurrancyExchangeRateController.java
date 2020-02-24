@@ -1,6 +1,7 @@
 package com.app.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -24,47 +25,35 @@ public class CurrancyExchangeRateController {
 	@Autowired
 	private ExchangeValueRepository exchangeValueRepository;
 
-	@GetMapping(value = "/exchange-rate/{from}/to/{to}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/exchange-rates/{from}/to/{to}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object getExhcangeRate(@PathVariable String from, @PathVariable String to, HttpServletRequest request) {
-
 		ExchangeValue entity = exchangeValueRepository.findByFromAndTo(from, to);
-		
-		int port =request.getServerPort();
-		
-		if(Objects.nonNull(entity)) {
+
+		int port = request.getServerPort();
+
+		if (Objects.nonNull(entity)) {
 			entity.setPort(port);
 		}
-		
+
 		return new ResponseEntity<ExchangeValue>(entity, HttpStatus.OK);
 
 	}
 
-	/*
-	 * @GetMapping(value = "/exchange-rate/{from}/to/{to}", produces =
-	 * MediaType.APPLICATION_JSON_VALUE) public Object getExhcangeRate(@PathVariable
-	 * String from, @PathVariable String to) {
-	 * 
-	 * 
-	 * ExchangeRate exchangeRate =
-	 * getExchangeRate().entrySet().stream().filter(exchange->
-	 * exchanlge.getKey().equalsIgnoreCase(from); }));
-	 * 
-	 * 
-	 * Map<String, ExchangeRate> map = getExchangeRate();
-	 * 
-	 * ExchangeRate exchangeRate = null;
-	 * 
-	 * for (Map.Entry<String, ExchangeRate> entry : map.entrySet()) {
-	 * 
-	 * if (entry.getKey().equalsIgnoreCase(from)) { exchangeRate =
-	 * map.get(entry.getKey()); break; }
-	 * 
-	 * }
-	 * 
-	 * return new ResponseEntity<ExchangeRate>(exchangeRate, HttpStatus.OK);
-	 * 
-	 * }
-	 */
+	@GetMapping(value = "/exchange-rates", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Object getAllExhcangeRate(HttpServletRequest request) {
+
+		List<ExchangeValue> entities = exchangeValueRepository.findAll();
+		int port = request.getServerPort();
+		
+		if (Objects.nonNull(entities)) {
+			entities.forEach(exchangeVal -> {
+				exchangeVal.setPort(port);
+			});
+		}
+
+		return new ResponseEntity<List<ExchangeValue>>(entities, HttpStatus.OK);
+
+	}
 
 	public Map<String, ExchangeRate> getExchangeRate() {
 		Map<String, ExchangeRate> currancyMap = new HashMap<String, ExchangeRate>();
