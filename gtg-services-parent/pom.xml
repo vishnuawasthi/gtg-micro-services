@@ -19,6 +19,7 @@
 		<module>../gtg-currency-exchange-service</module>
 		<module>../gtg-currency-conversion-service</module>
 		<module>../gtg-netflix-eureka-naming-server</module>
-		<module>../gtg-zuul-api-gateway-server</module>
+	    <module>../gtg-zuul-api-gateway-server</module>
+	    <module>../gtg-spring-boot-admin-server</module>
 	</modules>
 </project>

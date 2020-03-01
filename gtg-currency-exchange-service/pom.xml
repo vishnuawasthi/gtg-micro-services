@@ -14,13 +14,14 @@
 	<groupId>com.app</groupId>
 	<artifactId>gtg-currency-exchange-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>gtg-currency-exchange-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+		<start-class>com.app.CurrencyExchangeApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -59,6 +60,15 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		
+		<!--  Spring boot Admin Client -->
+
+	<dependency>
+		<groupId>de.codecentric</groupId>
+		<artifactId>spring-boot-admin-starter-client</artifactId>
+		<version>2.1.0</version>
+	</dependency>
 
 		<!--H2 Database dependencies -->
 
@@ -77,16 +87,12 @@
 		</dependency>
 
 		<!-- Eureka Naming Server -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+		<!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId> 
+			</dependency> -->
 
 		<!-- distributed tracing Using Spring Cloud Sleuth -->
-<!-- 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-sleuth</artifactId>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-sleuth</artifactId> 
+			</dependency> -->
 
 	</dependencies>
 
@@ -107,8 +113,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+
 			</plugin>
+
 		</plugins>
+
+
 	</build>
 
 </project>
