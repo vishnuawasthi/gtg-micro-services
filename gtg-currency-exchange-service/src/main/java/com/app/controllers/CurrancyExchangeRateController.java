@@ -26,7 +26,19 @@ public class CurrancyExchangeRateController {
 	private ExchangeValueRepository exchangeValueRepository;
 
 	@GetMapping(value = "/exchange-rates/{from}/to/{to}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Object getExhcangeRate(@PathVariable String from, @PathVariable String to, HttpServletRequest request) {
+	public Object getExhcangeRate(
+			@PathVariable String from, 
+			@PathVariable String to, 
+			HttpServletRequest request) {
+//getParameter("API_KEY")
+		System.out.println("API_KEY-> "+request.getAttribute("API_KEY"));
+		
+		
+		//String apiParamKey = request.getServletContext().getInitParameter("API_KEY");
+		
+		//System.out.println("apiParamKey -> "+apiParamKey);
+		
+		
 		ExchangeValue entity = exchangeValueRepository.findByFromAndTo(from, to);
 
 		int port = request.getServerPort();
@@ -44,7 +56,7 @@ public class CurrancyExchangeRateController {
 
 		List<ExchangeValue> entities = exchangeValueRepository.findAll();
 		int port = request.getServerPort();
-		
+
 		if (Objects.nonNull(entities)) {
 			entities.forEach(exchangeVal -> {
 				exchangeVal.setPort(port);

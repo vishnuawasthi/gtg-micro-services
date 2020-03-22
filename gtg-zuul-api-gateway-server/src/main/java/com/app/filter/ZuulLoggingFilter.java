@@ -1,6 +1,7 @@
 package com.app.filter;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +26,28 @@ public class ZuulLoggingFilter extends ZuulFilter {
 		// getting the current HTTP request that is to be handle
 
 		HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
+		HttpServletResponse response = RequestContext.getCurrentContext().getResponse();
 		// printing the detail of the request
 
 		logger.info("request -> {} request uri-> {}", request, request.getRequestURI());
-
-		return null;
+		
+	
+	//	request.setAttribute("API_KEY", apiKey);
+		
+		String apiKey =request.getParameter("apiKey");
+		
+		System.out.println("apiKey -> "+apiKey);
+		
+		if("ADMIN".equalsIgnoreCase(apiKey)) {
+			return null;
+		}
+		
+		response.setStatus(400);
+//		request.set
+		
+		//request.getServletContext().setInitParameter("API_KEY", apiKey);
+		
+		return "Invalid requst";
 	}
 
 	@Override

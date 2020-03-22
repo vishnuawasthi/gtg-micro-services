@@ -17,5 +17,10 @@
 # Local git configuration for <applicationName> cloud example running at 
 
 	http://localhost:8081/gtg-api-services/default
+	
+# In order to refresh the properties call , After this only values will be refreshed in all the services.
+
+	http://localhost:8081/application/refresh
+	
 
 

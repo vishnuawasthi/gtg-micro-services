@@ -2,7 +2,6 @@ package com.app.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,9 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-import com.app.dto.CurrencyConversionResponse;
+import com.app.config.CommonCofigProps;
 import com.app.restclients.ExchangeServiceRestClientProxy;
 
 @RestController
@@ -21,9 +19,15 @@ public class CurrencyConversionController {
 
 	@Autowired
 	private ExchangeServiceRestClientProxy exchangeServiceRestClient;
+	
+	@Autowired
+	private  CommonCofigProps commonCofigProps;
 
 	@GetMapping(value = "/convert", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Object convert(@RequestParam String from, @RequestParam String to, @RequestParam Long amount) {
+	public Object convert(
+			@RequestParam String from,
+			@RequestParam String to, 
+			@RequestParam Long amount) {
 
 		System.out.println("from     : " + from);
 		System.out.println("to       : " + to);
@@ -61,5 +65,16 @@ public class CurrencyConversionController {
 		return new ResponseEntity<String>(responseByFeignClient, HttpStatus.OK);
 
 	}
+	
+	
+	
+	@GetMapping(value = "/common-props", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Object commonProps() {
+		return new ResponseEntity<CommonCofigProps>(commonCofigProps, HttpStatus.OK);
+	}
+			
+			
+	
+	
 
 }
